@@ -86,7 +86,7 @@ if mode is None:
         adddir('Superjail',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Superjail?max-results=200'},'')
         adddir('Ugly Americans',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Ugly%20Americans?max-results=200'},'')
         adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
-        adddir('My Little Pony',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/My%20Little%20Pony?max-results=200'},'')
+        adddir('My Little Pony',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/My%20Little%20Pony?max-results=200&m=0'},'')
         adddir('Sonic Boom',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Sonic%20Boom?max-results=200'},'')
         adddir('Bee and PuppyCat',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Bee%20and%20PuppyCat?max-results=200'},'')
         adddir('Metalocalypse',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Metalocalypse?max-results=200'},'')
