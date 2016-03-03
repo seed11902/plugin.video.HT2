@@ -87,9 +87,11 @@ if mode is None:
         adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
         adddir('My Little Pony',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/My%20Little%20Pony?max-results=200'},'')
         adddir('Sonic Boom',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Sonic%20Boom?max-results=200'},'')
+        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 
 elif mode[0] == 'folder':
         Url = args['Url'][0]
         hdx3(Url)
+        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
