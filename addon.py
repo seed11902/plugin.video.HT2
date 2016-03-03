@@ -92,6 +92,8 @@ if mode is None:
         adddir('Metalocalypse',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Metalocalypse?max-results=200'},'')
         adddir('Rick and Morty',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Rick%20and%20Morty?max-results=200'},'')
         adddir('RWBY',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/RWBY?max-results=200'},'')
+        adddir('Dilbert',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dilbert?max-results=200'},'')
+        adddir('Dan Vs.',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dan%20Vs.?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 
