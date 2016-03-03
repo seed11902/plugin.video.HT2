@@ -11,6 +11,13 @@ addon_handle = int(sys.argv[1])
 args = urlparse.parse_qs(sys.argv[2][1:])
 
 xbmcplugin.setContent(addon_handle, 'movies')
+def find(pattern, string):
+        match = re.search(pattern,string)
+        if match:
+                ret =  match.group()
+        else: 
+                ret = "not find"
+        return ret
 def hdx3(url):
         #http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200
         #http://hdx3.blogspot.com/search/label/Mr.%20Pickles
@@ -30,8 +37,8 @@ def hdx3(url):
                                     for content in hentry.select('.entry-content'):
                                         str1 = content.text.replace('\n','')
                                         str1 = str1.replace(' ', '')
-                                        index = str1.find(u'密碼：')
-                                        passwd = str1[index:index+7].split(u'：')[1]
+                                        text = find(u'密碼\W*：' + r'\d{4}',str1)
+                                        passwd = text[-4:]
                                     url = urlparse.urlparse(iframe['src'])
                                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
                                     #http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
