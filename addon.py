@@ -31,7 +31,7 @@ def hdx3(url):
                         resSub = requests.get(a['href'])
                         soupSub = BeautifulSoup(resSub.text, "html.parser")       
                         for hentry in soupSub.select('.hentry'):
-                            for iframe in hentry.select('iframe'):
+                            for index,iframe in enumerate(hentry.select('iframe')):
                                 findxuite = iframe['src'].find('http://vlog.xuite.net');
                                 if findxuite == 0:
                                     for content in hentry.select('.entry-content'):
@@ -48,11 +48,13 @@ def hdx3(url):
                                     jd = json.loads(encodedjson)
                                     encodedjson2 = json.dumps(jd["media"])
                                     jd2 = json.loads(encodedjson2)
-                                    tittle = hentry.select('h3')[0].text
+                                    if index == 0:
+                                        title = hentry.select('h3')[0].text.replace('\n', '')
+                                    else:
+                                	title = hentry.select('h3')[0].text.replace('\n', '') + str(index)                                    
                                     media = jd2["html5Url"]
                                     image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
-                                    addLink(tittle, media, image)
-                                    #addDir(tittle, media, 1, image)
+                                    addLink(title, media, image)
                                     break
                     except:
                         print("except")
