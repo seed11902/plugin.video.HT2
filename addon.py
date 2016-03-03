@@ -72,6 +72,7 @@ def adddir(name,Url,iconimage):
         ok=True
         url = build_url(Url)
         li = xbmcgui.ListItem(name, iconImage='DefaultFolder.png', thumbnailImage=iconimage)
+        li.setInfo( type="Video", infoLabels={ "Title": name } )
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url,listitem=li, isFolder=True)        
         return ok
 def build_url(query):
@@ -81,7 +82,7 @@ mode = args.get('mode', None)
 
 if mode is None:
         adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
-        adddir('Adventure Time',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/%E6%8E%A2%E9%9A%AA%E6%B4%BB%E5%AF%B6?max-results=200'},'')
+        adddir('Adventure Time',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Adventure%20Time?max-results=200'},'')
         adddir('Superjail',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Superjail?max-results=200'},'')
         adddir('Ugly Americans',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Ugly%20Americans?max-results=200'},'')
         adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
