@@ -48,7 +48,8 @@ def hdx3(url):
                                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
                                     #http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
                                     a = 'http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId={}&passwd={}'.format(mediumId, passwd)
-                                    obj = requests.get(a).json()
+                                    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
+                                    obj = requests.get(a,  headers=headers).json()
                                     encodedjson = json.dumps(obj)
                                     jd = json.loads(encodedjson)
                                     encodedjson2 = json.dumps(jd["media"])
