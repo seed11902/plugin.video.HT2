@@ -23,12 +23,14 @@ def hdx3(url):
         #http://hdx3.blogspot.com/search/label/Mr.%20Pickles
         #http://hdx3.blogspot.com/search/label/%E6%8E%A2%E9%9A%AA%E6%B4%BB%E5%AF%B6?max-results=200
         while url:
-            res = requests.get(url)
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
+            res = requests.get(url, headers=headers)   
             soup = BeautifulSoup(res.text, "html.parser")
             for outer in soup.select('.post-outer'):
                 for a in outer.find_all('a', href=True):
                     try:
-                        resSub = requests.get(a['href'])
+                	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
+                	resSub = requests.get(a['href'], headers=headers)
                         soupSub = BeautifulSoup(resSub.text, "html.parser")       
                         for hentry in soupSub.select('.hentry'):
                             for index,iframe in enumerate(hentry.select('iframe')):
