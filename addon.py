@@ -31,7 +31,9 @@ def hdx3(url):
                     try:
                 	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
                 	resSub = requests.get(a['href'], headers=headers)
-                        soupSub = BeautifulSoup(resSub.text, "html.parser")       
+                	print resSub
+                        soupSub = BeautifulSoup(resSub.text, "html.parser")
+                        print resSub
                         for hentry in soupSub.select('.hentry'):
                             for index,iframe in enumerate(hentry.select('iframe')):
                                 findxuite = iframe['src'].find('http://vlog.xuite.net');
@@ -41,6 +43,7 @@ def hdx3(url):
                                         str1 = str1.replace(' ', '')
                                         text = find(u'密碼\W*：' + r'\d{4}',str1)
                                         passwd = text[-4:]
+                                        print passwd
                                     url = urlparse.urlparse(iframe['src'])
                                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
                                     #http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
@@ -56,6 +59,9 @@ def hdx3(url):
                                 	title = hentry.select('h3')[0].text.replace('\n', '') + str(index)                                    
                                     media = jd2["html5Url"]
                                     image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
+                                    print title
+                                    print media
+                                    print image
                                     addLink(title, media, image)
                     except:
                         print("HTTV　except!!!")
