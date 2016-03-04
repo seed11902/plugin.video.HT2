@@ -98,7 +98,6 @@ if mode is None:
         adddir('RWBY',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/RWBY?max-results=200'},'')
         adddir('Dilbert',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dilbert?max-results=200'},'')
         adddir('Dan Vs.',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dan%20Vs.?max-results=200'},'')
-        addLink('TEST VIDEO', 'http://b.mms.vlog.xuite.net/video/jaycool.jaycool/QlZMdFdNLTM2Mzg0MjkubXA0?k=b3babb4d766a336361fcc020ce602280&q=360', '')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 
