@@ -45,6 +45,7 @@ def hdx3(url):
                                         passwd = text[-4:]
                                         print passwd
                                     url = urlparse.urlparse(iframe['src'])
+                                    print url
                                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
                                     print mediumId
                                     #http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
