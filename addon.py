@@ -18,6 +18,13 @@ def find(pattern, string):
         else: 
                 ret = "not find"
         return ret
+def find2(pattern, string):
+    match = re.findall(pattern,string)
+    if match: 
+        ret =  match
+    else: 
+        ret = "not find"
+    return ret
 def hdx3(url):
         #http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200
         #http://hdx3.blogspot.com/search/label/Mr.%20Pickles
@@ -39,26 +46,26 @@ def hdx3(url):
                                     for content in hentry.select('.entry-content'):
                                         str1 = content.text.replace('\n','')
                                         str1 = str1.replace(' ', '')
-                                        text = find(u'密碼\W*：' + r'\d{4}',str1)
-                                        passwd = text[-4:]
+                                        pwd = find2(u'密碼\W*：' + r'\d{4}',str1)
                                     url = urlparse.urlparse(iframe['src'])
                                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
-                                    #http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
-                                    #a = 'http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId={}&passwd={}'.format(mediumId, passwd)
-                                    a = "http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=%s&passwd=%s"%(mediumId, passwd)
-                                    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
-                                    obj = requests.get(a,  headers=headers).json()
-                                    encodedjson = json.dumps(obj)
-                                    jd = json.loads(encodedjson)
-                                    encodedjson2 = json.dumps(jd["media"])
-                                    jd2 = json.loads(encodedjson2)
-                                    if index == 0:
-                                        title = hentry.select('h3')[0].text.replace('\n', '')
-                                    else:
-                                	title = hentry.select('h3')[0].text.replace('\n', '') + str(index)                                    
-                                    media = jd2["html5Url"]
-                                    image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
-                                    addLink(title, media, image)
+                                    for i, passwd in enumerate(pwd):
+                                    	#http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
+                                    	#a = 'http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId={}&passwd={}'.format(mediumId, passwd)
+                                    	a = "http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=%s&passwd=%s"%(mediumId, pwd[i][-4:])
+                                    	obj = requests.get(a,  headers=headers).json()
+                                    	encodedjson = json.dumps(obj)
+                                    	jd = json.loads(encodedjson)
+                                    	if jd["success"] == True:
+                                    		encodedjson2 = json.dumps(jd["media"])
+                                    		jd2 = json.loads(encodedjson2)
+                                    		if index == 0:
+                                        		title = hentry.select('h3')[0].text.replace('\n', '')
+                                    		else:
+                                			title = hentry.select('h3')[0].text.replace('\n', '') + str(index)                                    
+                                    		media = jd2["html5Url"]
+                                    		image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
+                                    		addLink(title, media, image)
                     except:
                         print("HTTV　except!!!")
             test = soup.find("a", {"id": "Blog1_blog-pager-older-link"})
@@ -98,6 +105,7 @@ if mode is None:
         adddir('RWBY',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/RWBY?max-results=200'},'')
         adddir('Dilbert',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dilbert?max-results=200'},'')
         adddir('Dan Vs.',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dan%20Vs.?max-results=200'},'')
+        adddir('Bravest Warriors',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Bravest%20Warriors?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 
