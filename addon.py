@@ -62,7 +62,7 @@ def hdx3(url):
                                     		if index == 0:
                                         		title = hentry.select('h3')[0].text.replace('\n', '')
                                     		else:
-                                			title = hentry.select('h3')[0].text.replace('\n', '') + str(index)                                    
+                                			title = hentry.select('h3')[0].text.replace('\n', '') + "_" + str(index)                                    
                                     		media = jd2["html5Url"]
                                     		image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
                                     		addLink(title, media, image)
