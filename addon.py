@@ -66,6 +66,7 @@ def hdx3(url):
                                     		media = jd2["html5Url"]
                                     		image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
                                     		addLink(title, media, image)
+                                    		break
                     except:
                         print("HTTV　except!!!")
             test = soup.find("a", {"id": "Blog1_blog-pager-older-link"})
