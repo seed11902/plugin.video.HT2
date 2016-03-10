@@ -25,10 +25,37 @@ def find2(pattern, string):
     else: 
         ret = "not find"
     return ret
+def jsonXuite(mediumId,passwd):
+    a = "http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=%s&passwd=%s"%(mediumId, passwd)
+    return a
+def subUrl(soupSub):
+    for hentry in soupSub.select('.hentry'):
+        for index,iframe in enumerate(hentry.select('iframe')):
+            findxuite = iframe['src'].find('http://vlog.xuite.net');
+                if findxuite == 0:
+                    for content in hentry.select('.entry-content'):
+                        str1 = content.text.replace('\n','')
+                        str1 = str1.replace(' ', '')
+                        pwd = find2(u'密碼\W*：' + r'\d{4}',str1)
+                     url = urlparse.urlparse(iframe['src'])
+                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
+                     for i, passwd in enumerate(pwd):
+                        a = jsonXuite(mediumId, pwd[i][-4:])
+                        obj = requests.get(a,  headers=headers).json()
+                        encodedjson = json.dumps(obj)
+                        jd = json.loads(encodedjson)
+                        if jd["success"] == True:
+                        	encodedjson2 = json.dumps(jd["media"])
+                                jd2 = json.loads(encodedjson2)
+                                if index == 0:
+                                	title = hentry.select('h3')[0].text.replace('\n', '')
+                                else:
+                                	title = hentry.select('h3')[0].text.replace('\n', '') + "_" + str(index)                                    
+                                    	media = jd2["html5Url"]
+                                    	image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
+                                    	addLink(title, media, image)
+                                    	break
 def hdx3(url):
-        #http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200
-        #http://hdx3.blogspot.com/search/label/Mr.%20Pickles
-        #http://hdx3.blogspot.com/search/label/%E6%8E%A2%E9%9A%AA%E6%B4%BB%E5%AF%B6?max-results=200
         while url:
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
             res = requests.get(url, headers=headers)   
@@ -39,34 +66,7 @@ def hdx3(url):
                 	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
                 	resSub = requests.get(a['href'], headers=headers)
                         soupSub = BeautifulSoup(resSub.text, "html.parser")
-                        for hentry in soupSub.select('.hentry'):
-                            for index,iframe in enumerate(hentry.select('iframe')):
-                                findxuite = iframe['src'].find('http://vlog.xuite.net');
-                                if findxuite == 0:
-                                    for content in hentry.select('.entry-content'):
-                                        str1 = content.text.replace('\n','')
-                                        str1 = str1.replace(' ', '')
-                                        pwd = find2(u'密碼\W*：' + r'\d{4}',str1)
-                                    url = urlparse.urlparse(iframe['src'])
-                                    mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
-                                    for i, passwd in enumerate(pwd):
-                                    	#http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=26057911&passwd=0214
-                                    	#a = 'http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId={}&passwd={}'.format(mediumId, passwd)
-                                    	a = "http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=%s&passwd=%s"%(mediumId, pwd[i][-4:])
-                                    	obj = requests.get(a,  headers=headers).json()
-                                    	encodedjson = json.dumps(obj)
-                                    	jd = json.loads(encodedjson)
-                                    	if jd["success"] == True:
-                                    		encodedjson2 = json.dumps(jd["media"])
-                                    		jd2 = json.loads(encodedjson2)
-                                    		if index == 0:
-                                        		title = hentry.select('h3')[0].text.replace('\n', '')
-                                    		else:
-                                			title = hentry.select('h3')[0].text.replace('\n', '') + "_" + str(index)                                    
-                                    		media = jd2["html5Url"]
-                                    		image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
-                                    		addLink(title, media, image)
-                                    		break
+                        subUrl(soupSub)
                     except:
                         print("HTTV　except!!!")
             test = soup.find("a", {"id": "Blog1_blog-pager-older-link"})
