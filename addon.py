@@ -154,7 +154,7 @@ elif mode[0] == '45gsp':
 elif mode[0] == 'folder':
         Url = args['Url'][0]
         Type = args['Type'][0]
-        if Typr == '45gsp':
+        if Type == '45gsp':
         	gsp(Url)
         else:
         	hdx3(Url)
