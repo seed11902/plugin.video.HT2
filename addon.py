@@ -119,6 +119,8 @@ if mode is None:
 elif mode[0] == 'A':
         adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
         adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
+        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
+        xbmcplugin.endOfDirectory(addon_handle)
 elif mode[0] == 'folder':
         Url = args['Url'][0]
         hdx3(Url)
