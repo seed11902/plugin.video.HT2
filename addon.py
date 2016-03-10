@@ -93,6 +93,8 @@ def build_url(query):
 mode = args.get('mode', None)
 
 if mode is None:
+        adddir('1TEST',{'mode': '', 'Url': ''},'')
+        #
         adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
         adddir('Adventure Time',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Adventure%20Time?max-results=200'},'')
         adddir('Superjail',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Superjail?max-results=200'},'')
@@ -114,7 +116,9 @@ if mode is None:
         adddir('Henry\'s Kitchen',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/%E5%8F%B2%E4%B8%8A%E6%9C%80%E6%82%B2%E5%93%80%E7%9A%84%E7%83%B9%E9%A3%AA%E6%95%99%E5%AD%B8?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
-
+elif mode[0] == '':
+        adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
+        adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
 elif mode[0] == 'folder':
         Url = args['Url'][0]
         hdx3(Url)
