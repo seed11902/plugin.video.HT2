@@ -116,7 +116,7 @@ elif mode[0] == 'hdx3':
         adddir('Bravest Warriors',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Bravest%20Warriors?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
-elif mode[0] == 'hdx3':
+elif mode[0] == 'hornydragon':
         adddir('Angry Video Game Nerd',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/AVGN?max-results=200'},'')
         adddir('Board James',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/Board%20James?max-results=200'},'')
         adddir('PewDiePie',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/PewDiePie?max-results=200'},'')
