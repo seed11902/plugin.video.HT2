@@ -95,7 +95,7 @@ mode = args.get('mode', None)
 if mode is None:
         adddir('hdx3',{'mode': 'hdx3', 'Url': ''},'')
         #
-        adddir('hornydragon',{'hornydragon': 'hdx3', 'Url': ''},'')
+        adddir('hornydragon',{'mode': 'hornydragon', 'Url': ''},'')
         #
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
