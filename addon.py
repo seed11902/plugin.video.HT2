@@ -93,8 +93,13 @@ def build_url(query):
 mode = args.get('mode', None)
 
 if mode is None:
-        adddir('1TEST',{'mode': 'A', 'Url': ''},'')
+        adddir('hdx3',{'mode': 'hdx3', 'Url': ''},'')
         #
+        adddir('hornydragon',{'hornydragon': 'hdx3', 'Url': ''},'')
+        #
+        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
+        xbmcplugin.endOfDirectory(addon_handle)
+elif mode[0] == 'hdx3':
         adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
         adddir('Adventure Time',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Adventure%20Time?max-results=200'},'')
         adddir('Superjail',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Superjail?max-results=200'},'')
@@ -109,16 +114,13 @@ if mode is None:
         adddir('Dilbert',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dilbert?max-results=200'},'')
         adddir('Dan Vs.',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dan%20Vs.?max-results=200'},'')
         adddir('Bravest Warriors',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Bravest%20Warriors?max-results=200'},'')
-        #
+        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
+        xbmcplugin.endOfDirectory(addon_handle)
+elif mode[0] == 'hdx3':
         adddir('Angry Video Game Nerd',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/AVGN?max-results=200'},'')
         adddir('Board James',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/Board%20James?max-results=200'},'')
         adddir('PewDiePie',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/PewDiePie?max-results=200'},'')
         adddir('Henry\'s Kitchen',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/%E5%8F%B2%E4%B8%8A%E6%9C%80%E6%82%B2%E5%93%80%E7%9A%84%E7%83%B9%E9%A3%AA%E6%95%99%E5%AD%B8?max-results=200'},'')
-        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
-        xbmcplugin.endOfDirectory(addon_handle)
-elif mode[0] == 'A':
-        adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
-        adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 elif mode[0] == 'folder':
