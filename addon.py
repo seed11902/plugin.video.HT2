@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*- 
 import urllib,urllib2,re,xbmcplugin,xbmcgui
 from bs4 import BeautifulSoup
@@ -31,30 +32,30 @@ def jsonXuite(mediumId,passwd):
 def subUrl(soupSub):
     for hentry in soupSub.select('.hentry'):
         for index,iframe in enumerate(hentry.select('iframe')):
-            findxuite = iframe['src'].find('http://vlog.xuite.net');
-                if findxuite == 0:
-                    for content in hentry.select('.entry-content'):
-                        str1 = content.text.replace('\n','')
-                        str1 = str1.replace(' ', '')
-                        pwd = find2(u'密碼\W*：' + r'\d{4}',str1)
-                     url = urlparse.urlparse(iframe['src'])
-                     mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
-                     for i, passwd in enumerate(pwd):
-                        a = jsonXuite(mediumId, pwd[i][-4:])
-                        obj = requests.get(a,  headers=headers).json()
-                        encodedjson = json.dumps(obj)
-                        jd = json.loads(encodedjson)
-                        if jd["success"] == True:
-                        	encodedjson2 = json.dumps(jd["media"])
-                                jd2 = json.loads(encodedjson2)
-                                if index == 0:
-                                	title = hentry.select('h3')[0].text.replace('\n', '')
-                                else:
-                                	title = hentry.select('h3')[0].text.replace('\n', '') + "_" + str(index)                                    
-                                    	media = jd2["html5Url"]
-                                    	image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
-                                    	addLink(title, media, image)
-                                    	break
+            findxuite = iframe['src'].find('http://vlog.xuite.net')
+            if findxuite == 0:
+                for content in hentry.select('.entry-content'):
+                    str1 = content.text.replace('\n','')
+                    str1 = str1.replace(' ', '')
+                    pwd = find2(u'密碼\W*：' + r'\d{4}',str1)
+                url = urlparse.urlparse(iframe['src'])
+                mediumId = base64.b64decode(url.path.split('/')[2]).split('-')[1].split('.')[0]
+                for i, passwd in enumerate(pwd):
+                    a = jsonXuite(mediumId, pwd[i][-4:])
+                    obj = requests.get(a).json()
+                    encodedjson = json.dumps(obj)
+                    jd = json.loads(encodedjson)
+                    if jd["success"] == True:
+                        encodedjson2 = json.dumps(jd["media"])
+                        jd2 = json.loads(encodedjson2)
+                        if index == 0:
+                            title = hentry.select('h3')[0].text.replace('\n', '')
+                        else:
+                            title = hentry.select('h3')[0].text.replace('\n', '') + "_" + str(index)
+                        media = jd2["html5Url"]
+                        image = 'http://vlog.xuite.net' + jd2["thumbnailUrl"]
+                        addLink(title, media, image)
+                        break
 def hdx3(url):
         while url:
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
