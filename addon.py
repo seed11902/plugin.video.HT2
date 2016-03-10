@@ -64,7 +64,6 @@ def hdx3(url):
             for outer in soup.select('.post-outer'):
                 for a in outer.find_all('a', href=True):
                     try:
-                	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
                 	resSub = requests.get(a['href'], headers=headers)
                         soupSub = BeautifulSoup(resSub.text, "html.parser")
                         subUrl(soupSub)
@@ -75,6 +74,24 @@ def hdx3(url):
                 url = test['href']
             else:
                 break
+def gsp(url):
+        while url:
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
+            res = requests.get(url, headers=headers)   
+            soup = BeautifulSoup(res.text, "html.parser")
+            for outer in soup.select('.entry-title'):
+                for a in outer.find_all('a', href=True):
+                    try:
+                	resSub = requests.get(a['href'], headers=headers)
+                        soupSub = BeautifulSoup(resSub.text, "html.parser")
+                        subUrl(soupSub)
+                    except:
+                        print("HTTV　except!!!")
+            test = soup.find("a", {"id": "Blog1_blog-pager-older-link"})
+            if test:
+                url = test['href']
+            else:
+                break            
 def addLink(name,url,iconimage):
         ok=True
         liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
@@ -98,34 +115,48 @@ if mode is None:
         #
         adddir('hornydragon',{'mode': 'hornydragon', 'Url': ''},'')
         #
+        adddir('45gsp',{'mode': '45gsp', 'Url': ''},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 elif mode[0] == 'hdx3':
-        adddir('Regular Show',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
-        adddir('Adventure Time',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Adventure%20Time?max-results=200'},'')
-        adddir('Superjail',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Superjail?max-results=200'},'')
-        adddir('Ugly Americans',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Ugly%20Americans?max-results=200'},'')
-        adddir('Mr. Pickles',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
-        adddir('My Little Pony',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/My%20Little%20Pony?max-results=200&m=0'},'')
-        adddir('Sonic Boom',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Sonic%20Boom?max-results=200&m=0'},'')
-        adddir('Bee and PuppyCat',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Bee%20and%20PuppyCat?max-results=200'},'')
-        adddir('Metalocalypse',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Metalocalypse?max-results=200'},'')
-        adddir('Rick and Morty',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Rick%20and%20Morty?max-results=200'},'')
-        adddir('RWBY',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/RWBY?max-results=200'},'')
-        adddir('Dilbert',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dilbert?max-results=200'},'')
-        adddir('Dan Vs.',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Dan%20Vs.?max-results=200'},'')
-        adddir('Bravest Warriors',{'mode': 'folder', 'Url': 'http://hdx3.blogspot.com/search/label/Bravest%20Warriors?max-results=200'},'')
+        adddir('Regular Show',{'mode': 'folder','Type': 'hdx3', 'Url': 'http://hdx3.blogspot.com/search/label/Regular%20Show?max-results=200'},'')
+        adddir('Adventure Time',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Adventure%20Time?max-results=200'},'')
+        adddir('Superjail',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Superjail?max-results=200'},'')
+        adddir('Ugly Americans',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Ugly%20Americans?max-results=200'},'')
+        adddir('Mr. Pickles',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Mr.%20Pickles?max-results=200'},'')
+        adddir('My Little Pony',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/My%20Little%20Pony?max-results=200&m=0'},'')
+        adddir('Sonic Boom',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Sonic%20Boom?max-results=200&m=0'},'')
+        adddir('Bee and PuppyCat',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Bee%20and%20PuppyCat?max-results=200'},'')
+        adddir('Metalocalypse',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Metalocalypse?max-results=200'},'')
+        adddir('Rick and Morty',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Rick%20and%20Morty?max-results=200'},'')
+        adddir('RWBY',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/RWBY?max-results=200'},'')
+        adddir('Dilbert',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Dilbert?max-results=200'},'')
+        adddir('Dan Vs.',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Dan%20Vs.?max-results=200'},'')
+        adddir('Bravest Warriors',{'mode': 'folder','Type': 'hdx3',  'Url': 'http://hdx3.blogspot.com/search/label/Bravest%20Warriors?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
 elif mode[0] == 'hornydragon':
-        adddir('Angry Video Game Nerd',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/AVGN?max-results=200'},'')
-        adddir('Board James',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/Board%20James?max-results=200'},'')
-        adddir('PewDiePie',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/PewDiePie?max-results=200'},'')
-        adddir('Henry\'s Kitchen',{'mode': 'folder', 'Url': 'http://hornydragon.blogspot.com/search/label/%E5%8F%B2%E4%B8%8A%E6%9C%80%E6%82%B2%E5%93%80%E7%9A%84%E7%83%B9%E9%A3%AA%E6%95%99%E5%AD%B8?max-results=200'},'')
+        adddir('Angry Video Game Nerd',{'mode': 'folder','Type': 'hornydragon', 'Url': 'http://hornydragon.blogspot.com/search/label/AVGN?max-results=200'},'')
+        adddir('Board James',{'mode': 'folder','Type': 'hornydragon', 'Url': 'http://hornydragon.blogspot.com/search/label/Board%20James?max-results=200'},'')
+        adddir('PewDiePie',{'mode': 'folder','Type': 'hornydragon', 'Url': 'http://hornydragon.blogspot.com/search/label/PewDiePie?max-results=200'},'')
+        adddir('Henry\'s Kitchen',{'mode': 'folder','Type': 'hornydragon', 'Url': 'http://hornydragon.blogspot.com/search/label/%E5%8F%B2%E4%B8%8A%E6%9C%80%E6%82%B2%E5%93%80%E7%9A%84%E7%83%B9%E9%A3%AA%E6%95%99%E5%AD%B8?max-results=200'},'')
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
+elif mode[0] == '45gsp':
+        adddir('s14',{'mode': 'folder', 'Type': '45gsp', 'Url': 'http://45gsp.blogspot.tw/search/label/s14?max-results=200'},'')
+        adddir('s15',{'mode': 'folder', 'Type': '45gsp', 'Url': 'http://45gsp.blogspot.tw/search/label/s15?max-results=200'},'')
+        adddir('s16',{'mode': 'folder', 'Type': '45gsp', 'Url': 'http://45gsp.blogspot.tw/search/label/s16?max-results=200'},'')
+        adddir('s17',{'mode': 'folder', 'Type': '45gsp', 'Url': 'http://45gsp.blogspot.tw/search/label/s17?max-results=200'},'')
+        adddir('s18',{'mode': 'folder', 'Type': '45gsp', 'Url': 'http://45gsp.blogspot.tw/search/label/s18?max-results=200'},'')
+        adddir('s19',{'mode': 'folder', 'Type': '45gsp', 'Url': 'http://45gsp.blogspot.tw/search/label/s19?max-results=200'},'')
+        xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
+        xbmcplugin.endOfDirectory(addon_handle)        
 elif mode[0] == 'folder':
         Url = args['Url'][0]
-        hdx3(Url)
+        Type = args['Type'][0]
+        if Typr == '45gsp':
+        	gsp(Url)
+        else:
+        	hdx3(Url)
         xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_TITLE)
         xbmcplugin.endOfDirectory(addon_handle)
