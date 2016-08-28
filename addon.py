@@ -33,6 +33,8 @@ def subUrl(soupSub):
     for hentry in soupSub.select('.hentry'):
         for index,iframe in enumerate(hentry.select('iframe')):
             findxuite = iframe['src'].find('http://vlog.xuite.net')
+            if findxuite == -1:
+                findxuite = iframe['src'].find('https://vlog.xuite.net');
             if findxuite == 0:
                 for content in hentry.select('.entry-content'):
                     str1 = content.text.replace('\n','')
