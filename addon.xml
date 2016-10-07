@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.HT"
-       name="HTTV"
+<addon id="plugin.video.HT2"
+       name="HTTV2"
        version="0.0.1"
        provider-name="HT">
   <requires>
