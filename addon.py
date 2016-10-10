@@ -29,7 +29,10 @@ def find2(pattern, string):
 def jsonXuite(mediumId,passwd):
     a = "http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=%s&passwd=%s"%(mediumId, passwd)
     return a
-def subUrl(soupSub):
+def subUrl(a):
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
+    resSub = requests.get(a['href'], headers=headers)
+    soupSub = BeautifulSoup(resSub.text, "html.parser")
     for hentry in soupSub.select('.hentry'):
         for index,iframe in enumerate(hentry.select('iframe')):
             findxuite = iframe['src'].find('http://vlog.xuite.net')
@@ -60,15 +63,12 @@ def subUrl(soupSub):
                         break
 def hdx3(url):
         while url:
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
             res = requests.get(url, headers=headers)   
             soup = BeautifulSoup(res.text, "html.parser")
             for outer in soup.select('.post-outer'):
                 for a in outer.find_all('a', href=True):
                     try:
-                	resSub = requests.get(a['href'], headers=headers)
-                        soupSub = BeautifulSoup(resSub.text, "html.parser")
-                        subUrl(soupSub)
+                        subUrl(a)
                     except:
                         print("HTTV　except!!!")
             test = soup.find("a", {"id": "Blog1_blog-pager-older-link"})
@@ -84,9 +84,7 @@ def gsp(url):
             for outer in soup.select('.entry-title'):
                 for a in outer.find_all('a', href=True):
                     try:
-                	resSub = requests.get(a['href'], headers=headers)
-                        soupSub = BeautifulSoup(resSub.text, "html.parser")
-                        subUrl(soupSub)
+                	subUrl(a)
                     except:
                         print("HTTV　except!!!")
             test = soup.find("a", {"id": "Blog1_blog-pager-older-link"})
