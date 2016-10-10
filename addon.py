@@ -12,6 +12,7 @@ addon_handle = int(sys.argv[1])
 args = urlparse.parse_qs(sys.argv[2][1:])
 
 xbmcplugin.setContent(addon_handle, 'movies')
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
 def find(pattern, string):
         match = re.search(pattern,string)
         if match:
@@ -30,7 +31,6 @@ def jsonXuite(mediumId,passwd):
     a = "http://vlog.xuite.net/_ajax/default/media/ajax?act=checkPasswd&mediumId=%s&passwd=%s"%(mediumId, passwd)
     return a
 def subUrl(a):
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
     resSub = requests.get(a['href'], headers=headers)
     soupSub = BeautifulSoup(resSub.text, "html.parser")
     for hentry in soupSub.select('.hentry'):
@@ -78,7 +78,6 @@ def hdx3(url):
                 break
 def gsp(url):
         while url:
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'}
             res = requests.get(url, headers=headers)   
             soup = BeautifulSoup(res.text, "html.parser")
             for outer in soup.select('.entry-title'):
